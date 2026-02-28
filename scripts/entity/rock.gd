@@ -1,2 +1,16 @@
 extends GridLiver
 class_name Rock
+
+func _ready():
+	super._ready()
+	pushable_uphill = false
+	pushable_downhill = true
+
+func _update():
+	var current_tile = levelgrid.local_to_map(global_position)
+	var entities = levelgrid.get_entities_at_tile(current_tile)
+	for entity in entities:
+		if entity is Dino and entity.get_parent() != null:
+			entity._update()
+			get_parent().remove_child(entity)
+	super._update()

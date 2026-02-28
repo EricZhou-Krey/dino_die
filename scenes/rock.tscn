@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://6crmo5mk05xo"]
+
+[ext_resource type="Script" path="res://scripts/entity/rock.gd" id="1_kpnja"]
+[ext_resource type="Texture2D" uid="uid://d3xq2hw3dyox1" path="res://assets/Rocks/Rock.png" id="2_royxl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mkbho"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_royxl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Rock" type="Node2D"]
+script = ExtResource("1_kpnja")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mkbho")

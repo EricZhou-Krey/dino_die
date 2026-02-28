@@ -1,8 +1,6 @@
 extends GridLiver
 class_name Player
 
-@export var facing_direction: Vector2i = Vector2i.DOWN
-
 func _input(event):
 	var movement = {
 		"left": Vector2i.LEFT,
@@ -10,7 +8,7 @@ func _input(event):
 		"up": Vector2i.UP,
 		"down": Vector2i.DOWN,
 	}
-
+	
 	for label in movement:
 		if event.is_action_pressed(label):
 			facing_direction = movement[label]
@@ -21,9 +19,27 @@ func _input(event):
 		levelgrid.progress_time()
 	if event.is_action_pressed("burn"):
 		var current_tile = levelgrid.local_to_map(global_position)
-		var entity = levelgrid.get_back_entity_at_tile(current_tile + facing_direction)
-		if entity != null and entity.has_method("burn"):
-			entity.burn()
+		var entities = levelgrid.get_entities_at_tile(current_tile + facing_direction)
+		for entity in entities:
+			if entity != null and not(levelgrid.unreachable(entity.height, height)) and entity.has_method("burn"):
+				entity.burn()
+	
 		levelgrid.progress_time()
+		
 	if event.is_action_pressed("undo"):
 		levelgrid.revert()
+	if event.is_action_pressed("reset"):
+		levelgrid.reset()
+
+func _update():
+	super._update()
+	var current_tile = levelgrid.local_to_map(global_position)
+	var tile_data = levelgrid.get_cell_tile_data(0, current_tile)
+	if tile_data.get_custom_data("win_tile"):
+		var won = true
+		var parent = get_parent()
+		for entity in parent.get_children():
+			if entity is Dino and entity.target:
+				won = false
+		if won:
+			print("win")
