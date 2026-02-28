@@ -3,16 +3,16 @@ class_name GridLiver
 
 @onready var levelgrid: LevelGrid = $"../LevelGrid"
 @onready var sprite_2d: Sprite2D = $Sprite2D
-
 @export var height = 0
 
+var transparent: bool = false
 signal updated(this: GridLiver, state: Dictionary)
 
 var state = {}
 
 func _ready():
 	var current_tile: Vector2i = levelgrid.local_to_map(global_position) 
-	levelgrid.set_entity_at_tile(current_tile, self)
+	levelgrid.add_entity_at_tile(current_tile, self)
 	levelgrid.connect("update", _update)
 	
 	state["position"] = global_position
@@ -25,13 +25,13 @@ func _update():
 
 func set_state(new_state: Dictionary):
 	var current_tile: Vector2i = levelgrid.local_to_map(global_position)
-	levelgrid.set_entity_at_tile(current_tile, null)
+	levelgrid.remove_entity_at_tile(current_tile, self)
 	
 	state = new_state
 	global_position = state["position"]
 	
 	var new_tile: Vector2i = levelgrid.local_to_map(global_position)
-	levelgrid.set_entity_at_tile(new_tile, self)
+	levelgrid.add_entity_at_tile(new_tile, self)
 	
 	sprite_2d.global_position = state["position"]
 	height = state["height"]
@@ -48,30 +48,36 @@ func move(direction: Vector2i) -> bool:
 	if tile_data == null or tile_data.get_custom_data("walkable") == false:
 		return false
 	
-	var entity_at_target = levelgrid.get_entity_at_tile(target_tile)
+	var entities_at_target = levelgrid.get_entities_at_tile(target_tile)
 	
 	var tile_height = tile_data.get_custom_data("height")
 	
 	if tile_height != height:
-		if height + 1 == tile_height:
+		var from_tile = levelgrid.get_cell_tile_data(0, current_tile)
+		var slope_from = from_tile.get_custom_data("slope_direction")
+		var slope_to = tile_data.get_custom_data("slope_direction")
+		if height + 1 == tile_height and (slope_to == direction or slope_from == direction):
 			height += 1
-		elif height - 1 == tile_height:
+		elif height - 1 == tile_height and (slope_to == -direction or slope_from == -direction):
 			height -= 1
 		else:
 			return false
-			
-	if entity_at_target != null:
+	
+	for entity_at_target in entities_at_target:
 		var tile_behind_target = target_tile + direction
-		var entity_behind_target = levelgrid.get_entity_at_tile(tile_behind_target)
-		
-		if entity_behind_target != null:
-			return false
+		var entities_behind_target = levelgrid.get_entities_at_tile(tile_behind_target)
+
+		for entity_behind_target in entities_behind_target:
+			if levelgrid.unreachable(entity_behind_target.height, entity_at_target.height): continue
+			if entity_behind_target != null and not entity_behind_target.transparent and not entity_at_target.transparent:
+				print(entities_at_target, entities_behind_target)
+				return false
 		
 		if not(entity_at_target.move(direction)):
 			return false
 	
-	levelgrid.set_entity_at_tile(current_tile, null)
-	levelgrid.set_entity_at_tile(target_tile, self)
+	levelgrid.remove_entity_at_tile(current_tile, self)
+	levelgrid.add_entity_at_tile(target_tile, self)
 	
 	global_position = levelgrid.map_to_local(target_tile)
 	sprite_2d.global_position = levelgrid.map_to_local(current_tile)
