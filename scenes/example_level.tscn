@@ -35,6 +35,15 @@ rotation = 3.14159
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("2_16hhj")
 
+[node name="Rock3" type="Node2D" parent="."]
+position = Vector2(88, 40)
+script = ExtResource("5_y76f8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Rock3"]
+rotation = 3.14159
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_16hhj")
+
 [node name="Rock2" type="Node2D" parent="."]
 position = Vector2(72, 88)
 rotation = 3.14159

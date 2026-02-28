@@ -7,6 +7,7 @@ class_name GridLiver
 
 var transparent: bool = false
 var pushable_uphill: bool = true
+var pushable_downhill = false
 var can_push: bool = true
 signal updated(this: GridLiver, state: Dictionary)
 
@@ -66,6 +67,12 @@ func move(direction: Vector2i) -> bool:
 				height -= 1
 			else:
 				return false
+		#doesn't work
+		elif pushable_downhill:
+			if tile_height < height:
+				print(tile_height, height)
+				height = tile_height
+				print("attempt to push down")
 		else:
 			return false
 	

@@ -4,6 +4,7 @@ class_name Rock
 func _ready():
 	super._ready()
 	pushable_uphill = false
+	pushable_downhill = true
 
 func _update():
 	var current_tile = levelgrid.local_to_map(global_position)
