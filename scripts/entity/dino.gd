@@ -10,10 +10,16 @@ func _ready():
 	
 func _set_facing_direction(direction: Vector2i):
 	facing_direction = direction
-	if facing_direction == Vector2i.RIGHT:
-		rotation = 90
-	else:
-		rotation = 270
+	match facing_direction:
+		Vector2i.RIGHT:
+			rotation = 90
+		Vector2i.LEFT:
+			rotation = 180
+		Vector2i.DOWN:
+			rotation = 200
+		_:
+			rotation = 0
+		
 
 func set_state(new_state: Dictionary):
 	super.set_state(new_state)
