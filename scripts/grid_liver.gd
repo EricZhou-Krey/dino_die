@@ -6,13 +6,35 @@ class_name GridLiver
 
 @export var height = 0
 
+signal updated(this: GridLiver, state: Dictionary)
+
+var state = {}
+
 func _ready():
 	var current_tile: Vector2i = levelgrid.local_to_map(global_position) 
 	levelgrid.set_entity_at_tile(current_tile, self)
 	levelgrid.connect("update", _update)
+	
+	state["position"] = global_position
+	state["height"] = height
 
 func _update():
-	pass
+	levelgrid.updated(self, state.duplicate(true))
+	state["position"] = global_position
+	state["height"] = height
+
+func set_state(new_state: Dictionary):
+	var current_tile: Vector2i = levelgrid.local_to_map(global_position)
+	levelgrid.set_entity_at_tile(current_tile, null)
+	
+	state = new_state
+	global_position = state["position"]
+	
+	var new_tile: Vector2i = levelgrid.local_to_map(global_position)
+	levelgrid.set_entity_at_tile(new_tile, self)
+	
+	sprite_2d.global_position = state["position"]
+	height = state["height"]
 
 func _physics_process(delta):
 	sprite_2d.global_position = sprite_2d.global_position.move_toward(global_position, 2)
@@ -37,7 +59,7 @@ func move(direction: Vector2i) -> bool:
 			height -= 1
 		else:
 			return false
-		
+			
 	if entity_at_target != null:
 		var tile_behind_target = target_tile + direction
 		var entity_behind_target = levelgrid.get_entity_at_tile(tile_behind_target)

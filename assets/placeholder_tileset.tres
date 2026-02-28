@@ -61,6 +61,7 @@ texture = ExtResource("1_ng5vl")
 7:3/0 = 0
 0:4/0 = 0
 1:4/0 = 0
+1:4/0/custom_data_0 = true
 2:4/0 = 0
 2:4/0/custom_data_0 = true
 2:4/0/custom_data_1 = 2
