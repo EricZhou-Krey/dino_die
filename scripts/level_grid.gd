@@ -28,6 +28,7 @@ func revert():
 	if len(entity_history) < 1: return
 	var previous_states = entity_history.pop_back()
 	for entity in previous_states:
+		# check if entity exists if it does not then create it beofre setting state
 		entity.set_state(previous_states[entity])
 	entity_time -= 1
 
