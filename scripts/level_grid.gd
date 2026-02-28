@@ -5,8 +5,8 @@ var entities: Array[Array] = []
 var grid_size: Vector2i
 var offset: Vector2i
 
-var entity_history: Array[Dictionary] = [{}]
-var entity_time: int = 0
+var entity_history: Array[Dictionary] = []
+var entity_time: int = -1
 
 signal update
 
@@ -36,6 +36,17 @@ func revert():
 			parent.add_child(entity)
 		entity.set_state(previous_states[entity])
 	entity_time -= 1
+
+func reset():
+	if len(entity_history) < 1: return
+	var previous_states = entity_history.pop_front()
+	entity_history.clear()
+	for entity in previous_states:
+		var parent = get_parent()
+		if not(entity in parent.get_children()):
+			parent.add_child(entity)
+		entity.set_state(previous_states[entity])
+	entity_time = -1
 
 func updated(entity: GridLiver, state: Dictionary):
 	entity_history[entity_time][entity] = state
