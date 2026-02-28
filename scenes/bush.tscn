@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c43fg4m4xmkc2"]
+
+[ext_resource type="Script" path="res://scripts/entity/bush.gd" id="1_2hb3u"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mrk1v"]
+
+[node name="Bush" type="Node2D"]
+position = Vector2(152, 40)
+script = ExtResource("1_2hb3u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(16, 16)
+texture = SubResource("PlaceholderTexture2D_mrk1v")

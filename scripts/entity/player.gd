@@ -1,8 +1,6 @@
 extends GridLiver
 class_name Player
 
-@export var facing_direction: Vector2i = Vector2i.DOWN
-
 func _input(event):
 	var movement = {
 		"left": Vector2i.LEFT,
@@ -23,18 +21,15 @@ func _input(event):
 		var entities = levelgrid.get_entities_at_tile(current_tile + facing_direction)
 		
 		for entity in entities:
-			if entity.height != height \
-			and entity.height != height + 1 \
-			and entity.height != height - 1:
-				pass
-			else:
-				if entity != null and entity.has_method("burn"):
-					entity.burn()
+			if entity != null and not(levelgrid.unreachable(entity.height, height)) and entity.has_method("burn"):
+				entity.burn()
 	
 		levelgrid.progress_time()
 		
 	if event.is_action_pressed("undo"):
 		levelgrid.revert()
+	if event.is_action_pressed("reset"):
+		levelgrid.reset()
 
 func _update():
 	super._update()
