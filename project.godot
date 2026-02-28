@@ -15,13 +15,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Dino Die"
-<<<<<<< HEAD
 run/main_scene="uid://b30qd50q2sbod"
 config/features=PackedStringArray("4.6", "Forward Plus")
-=======
-run/main_scene="res://scenes/example_level.tscn"
-config/features=PackedStringArray("4.0", "Forward Plus")
->>>>>>> c1d49010101f23698d4eb4da77992b4cea10fc65
 config/icon="res://icon.svg"
 
 [display]
