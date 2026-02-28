@@ -9,6 +9,10 @@ class_name GridLiver
 func _ready():
 	var current_tile: Vector2i = levelgrid.local_to_map(global_position) 
 	levelgrid.set_entity_at_tile(current_tile, self)
+	levelgrid.connect("update", _update)
+
+func _update():
+	pass
 
 func _physics_process(delta):
 	sprite_2d.global_position = sprite_2d.global_position.move_toward(global_position, 2)
