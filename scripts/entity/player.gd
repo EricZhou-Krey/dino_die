@@ -21,9 +21,18 @@ func _input(event):
 		levelgrid.progress_time()
 	if event.is_action_pressed("burn"):
 		var current_tile = levelgrid.local_to_map(global_position)
-		var entity = levelgrid.get_back_entity_at_tile(current_tile + facing_direction)
-		if entity != null and entity.has_method("burn"):
-			entity.burn()
+		var entities = levelgrid.get_entities_at_tile(current_tile + facing_direction)
+		
+		for entity in entities:
+			if entity.height != height \
+			and entity.height != height + 1 \
+			and entity.height != height - 1:
+				pass
+			else:
+				if entity != null and entity.has_method("burn"):
+					entity.burn()
+	
 		levelgrid.progress_time()
+		
 	if event.is_action_pressed("undo"):
 		levelgrid.revert()

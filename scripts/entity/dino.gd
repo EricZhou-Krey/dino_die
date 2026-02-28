@@ -34,7 +34,9 @@ func _update():
 	
 	var current_tile = levelgrid.local_to_map(global_position)
 	for direction in eat_directions:
-		var entity = levelgrid.get_entity_at_tile(current_tile + direction)
-		if entity != null and (entity is Player or entity is Food):
-			print(self, "has eaten", entity)
+		var entities = levelgrid.get_entities_at_tile(current_tile + direction)
+		for entity in entities:
+			if levelgrid.unreachable(entity.height, height): continue
+			if entity != null and (entity is Player or entity is Food):
+				print(self, "has eaten", entity)
 	

@@ -1,8 +1,7 @@
 extends TileMap
 class_name LevelGrid
 
-var back_entities: Array[GridLiver] = []
-var entities: Array[GridLiver] = []
+var entities: Array[Array] = []
 var grid_size: Vector2i
 var offset: Vector2i
 
@@ -16,8 +15,12 @@ func _ready():
 	grid_size = used_rect.size
 	offset = used_rect.position
 	
-	back_entities.resize(grid_size.x * grid_size.y)
 	entities.resize(grid_size.x * grid_size.y)
+	
+	for y in range(grid_size.y):
+		for x in range(grid_size.x):
+			var coords = Vector2i(x, y) + offset
+			entities[x + (grid_size.x * y)] = []
 
 func progress_time():
 	entity_time += 1
@@ -35,15 +38,14 @@ func revert():
 func updated(entity: GridLiver, state: Dictionary):
 	entity_history[entity_time][entity] = state
 
-
-func get_back_entity_at_tile(tile: Vector2i):
-	return back_entities[tile.x + (grid_size.x * tile.y)]
-
-func set_back_entity_at_tile(tile: Vector2i, entity: GridLiver):
-	back_entities[tile.x + (grid_size.x * tile.y)] = entity
-	
-func get_entity_at_tile(tile: Vector2i):
+func get_entities_at_tile(tile: Vector2i):
 	return entities[tile.x + (grid_size.x * tile.y)]
 
-func set_entity_at_tile(tile: Vector2i, entity: GridLiver):
-	entities[tile.x + (grid_size.x * tile.y)] = entity
+func add_entity_at_tile(tile: Vector2i, entity: GridLiver):
+	entities[tile.x + (grid_size.x * tile.y)].append(entity)
+
+func remove_entity_at_tile(tile: Vector2i, entity: GridLiver):
+	entities[tile.x + (grid_size.x * tile.y)].erase(entity)
+
+func unreachable(h_a: int, h_b: int):
+	return h_a != h_b and h_a != h_b + 1 and h_a != h_b - 1
