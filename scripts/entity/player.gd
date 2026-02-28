@@ -10,7 +10,6 @@ func _input(event):
 		"up": Vector2i.UP,
 		"down": Vector2i.DOWN,
 	}
-
 	for label in movement:
 		if event.is_action_pressed(label):
 			facing_direction = movement[label]
