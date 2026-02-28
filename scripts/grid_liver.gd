@@ -6,6 +6,7 @@ class_name GridLiver
 @export var height = 0
 
 var transparent: bool = false
+var pushable_uphill: bool = true
 signal updated(this: GridLiver, state: Dictionary)
 
 var state = {}
@@ -53,13 +54,16 @@ func move(direction: Vector2i) -> bool:
 	var tile_height = tile_data.get_custom_data("height")
 	
 	if tile_height != height:
-		var from_tile = levelgrid.get_cell_tile_data(0, current_tile)
-		var slope_from = from_tile.get_custom_data("slope_direction")
-		var slope_to = tile_data.get_custom_data("slope_direction")
-		if height + 1 == tile_height and (slope_to == direction or slope_from == direction):
-			height += 1
-		elif height - 1 == tile_height and (slope_to == -direction or slope_from == -direction):
-			height -= 1
+		if pushable_uphill:
+			var from_tile = levelgrid.get_cell_tile_data(0, current_tile)
+			var slope_from = from_tile.get_custom_data("slope_direction")
+			var slope_to = tile_data.get_custom_data("slope_direction")
+			if height + 1 == tile_height and (slope_to == direction or slope_from == direction):
+				height += 1
+			elif height - 1 == tile_height and (slope_to == -direction or slope_from == -direction):
+				height -= 1
+			else:
+				return false
 		else:
 			return false
 	
@@ -70,11 +74,11 @@ func move(direction: Vector2i) -> bool:
 		for entity_behind_target in entities_behind_target:
 			if levelgrid.unreachable(entity_behind_target.height, entity_at_target.height): continue
 			if entity_behind_target != null and not entity_behind_target.transparent and not entity_at_target.transparent:
-				print(entities_at_target, entities_behind_target)
 				return false
 		
-		if not(entity_at_target.move(direction)):
-			return false
+		if not(entity_at_target.transparent):
+			if not(entity_at_target.move(direction)):
+				return false
 	
 	levelgrid.remove_entity_at_tile(current_tile, self)
 	levelgrid.add_entity_at_tile(target_tile, self)

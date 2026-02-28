@@ -2,10 +2,12 @@ extends GridLiver
 class_name Dino
 
 @export var facing_direction: Vector2i = Vector2i.RIGHT
+@export var target = false
 var eat_directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
 
 func _ready():
 	super._ready()
+	transparent = true
 	_set_facing_direction(facing_direction)
 	state["facing_direction"] = facing_direction
 	
