@@ -48,6 +48,11 @@ texture = ExtResource("1_ng5vl")
 1:5/0 = 0
 2:5/0 = 0
 3:5/0 = 0
+<<<<<<< HEAD
+=======
+3:5/0/custom_data_0 = true
+3:5/0/custom_data_3 = true
+>>>>>>> 8d19036b94cbaff476b8d66ff7d1f2cf26f82531
 4:5/0 = 0
 5:5/0 = 0
 6:5/0 = 0
@@ -76,4 +81,6 @@ custom_data_layer_1/name = "height"
 custom_data_layer_1/type = 2
 custom_data_layer_2/name = "slope_direction"
 custom_data_layer_2/type = 6
+custom_data_layer_3/name = "win_tile"
+custom_data_layer_3/type = 1
 sources/2 = SubResource("TileSetAtlasSource_8s2gs")
