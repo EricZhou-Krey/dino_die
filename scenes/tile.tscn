@@ -1,6 +1,25 @@
 [gd_scene load_steps=2 format=3 uid="uid://dv8rbbqw1kvlm"]
 
-[ext_resource type="Script" path="res://scenes/something.gd" id="1_tthl4"]
+[sub_resource type="GDScript" id="GDScript_j2xyi"]
+script/source = "extends TileMap
+class_name Grid
+
+@export var grid_size = 16
+@export var examples: Array[Array]
+
+
+var grid = []
+
+
+func on_ready():
+	for i in range(16):
+		for j in range(16):
+			grid[i][j] = [i, j]
+			self.tilemap.set_cell(Vector2i(i, j), 0, Vector2i(i,j))
+
+func update_grid():
+	pass
+"
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_tthl4")
+script = SubResource("GDScript_j2xyi")

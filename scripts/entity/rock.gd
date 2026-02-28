@@ -1,3 +1,2 @@
 extends GridLiver
-class_name Grass
-
+class_name Rock
