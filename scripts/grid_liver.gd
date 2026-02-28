@@ -7,6 +7,7 @@ class_name GridLiver
 
 var transparent: bool = false
 var pushable_uphill: bool = true
+var can_push: bool = true
 signal updated(this: GridLiver, state: Dictionary)
 
 var state = {}
@@ -20,6 +21,7 @@ func _ready():
 	state["height"] = height
 
 func _update():
+	if get_parent() == null: return
 	levelgrid.updated(self, state.duplicate(true))
 	state["position"] = global_position
 	state["height"] = height
@@ -77,7 +79,7 @@ func move(direction: Vector2i) -> bool:
 				return false
 		
 		if not(entity_at_target.transparent):
-			if not(entity_at_target.move(direction)):
+			if not(can_push) or not(entity_at_target.move(direction)):
 				return false
 	
 	levelgrid.remove_entity_at_tile(current_tile, self)
