@@ -4,6 +4,8 @@ class_name GridLiver
 @onready var levelgrid: LevelGrid = $"../LevelGrid"
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
+@export var height = 0
+
 func _ready():
 	var current_tile: Vector2i = levelgrid.local_to_map(global_position) 
 	levelgrid.set_entity_at_tile(current_tile, self)
@@ -21,16 +23,27 @@ func move(direction: Vector2i) -> bool:
 		return false
 	
 	var entity_at_target = levelgrid.get_entity_at_tile(target_tile)
+	
+	var tile_height = tile_data.get_custom_data("height")
+	
+	if tile_height != height:
+		if height + 1 == tile_height:
+			height += 1
+		elif height - 1 == tile_height:
+			height -= 1
+		else:
+			return false
+		
 	if entity_at_target != null:
 		var tile_behind_target = target_tile + direction
 		var entity_behind_target = levelgrid.get_entity_at_tile(tile_behind_target)
 		
 		if entity_behind_target != null:
 			return false
-			
+		
 		if not(entity_at_target.move(direction)):
 			return false
-		
+	
 	levelgrid.set_entity_at_tile(current_tile, null)
 	levelgrid.set_entity_at_tile(target_tile, self)
 	

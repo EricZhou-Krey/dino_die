@@ -13,11 +13,6 @@ func _ready():
 	offset = used_rect.position
 	
 	entities.resize(grid_size.x * grid_size.y)
-	
-	for y in range(grid_size.y):
-		for x in range(grid_size.x):
-			var coords = Vector2i(x, y) + offset
-			entities[x + (grid_size.x * y)] = null
 
 func get_entity_at_tile(tile: Vector2i):
 	return entities[tile.x + (grid_size.x * tile.y)]
