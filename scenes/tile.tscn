@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://dv8rbbqw1kvlm"]
-
-[ext_resource type="Script" uid="uid://cg815j6bkk2cy" path="res://scenes/tile.gd" id="1_3dk36"]
-
-[node name="Sprite2D" type="Sprite2D" unique_id=717457251]
-script = ExtResource("1_3dk36")
