@@ -1,6 +1,9 @@
 extends GridLiver
 class_name Player
 
+@export var available_tools : Array[Tool] = []
+var current_tool_index: int = 0
+
 func _input(event):
 	var movement = {
 		"left": Vector2i.LEFT,
@@ -25,7 +28,10 @@ func _input(event):
 				entity.burn()
 	
 		levelgrid.progress_time()
-		
+	if event.is_action_pressed("change_tool"):
+		current_tool_index = (current_tool_index+1)%available_tools.size()
+	if event.is_action_pressed("tool"):
+		available_tools[current_tool_index].use_tool(self)
 	if event.is_action_pressed("undo"):
 		levelgrid.revert()
 	if event.is_action_pressed("reset"):

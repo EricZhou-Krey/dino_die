@@ -22,9 +22,25 @@ func set_state(new_state: Dictionary):
 func _update():
 	super._update()
 	state["facing_direction"] = facing_direction
+	match facing_direction:
+		Vector2i.LEFT:
+			sprite_2d.frame = 1
+			sprite_2d.scale.x = 1
+		Vector2i.RIGHT:
+			sprite_2d.frame = 1
+			sprite_2d.scale.x = -1
+		Vector2i.UP:
+			sprite_2d.frame = 2
+		Vector2i.DOWN:
+			sprite_2d.frame = 0
+
+	check_sight()
 	if not(move(facing_direction)):
 		_set_facing_direction(-facing_direction)
-	
+	check_sight()
+	eat_entities()
+
+func eat_entities():
 	var current_tile = levelgrid.local_to_map(global_position)
 	for direction in eat_directions:
 		var entities = levelgrid.get_entities_at_tile(current_tile + direction)
@@ -32,4 +48,36 @@ func _update():
 			if levelgrid.unreachable(entity.height, height): continue
 			if entity != null and (entity is Player or entity is Food):
 				print(self, "has eaten", entity)
+				
+func check_sight()-> bool:
+	var directions: Array[Vector2i] = [facing_direction]
+	var leftDir : Vector2i = Vector2i(facing_direction.y, facing_direction.x)
+	var rightDir: Vector2i = Vector2i(-facing_direction.y, -facing_direction.x)
+	directions.append(leftDir)
+	directions.append(rightDir)
+	for direction in directions:
+		if check_sight_direction(direction):
+			print("player spotted by dino")
+			return true
+	return false
 	
+	
+func check_sight_direction(direction: Vector2i)-> bool:
+	var start_tile: Vector2i = levelgrid.local_to_map(global_position)
+	var current_tile: Vector2i = start_tile
+	var blocked: bool = false
+	while not blocked:
+		var target_tile: Vector2i = current_tile + direction
+		current_tile = target_tile
+		var tile_data: TileData = levelgrid.get_cell_tile_data(0, target_tile)
+		if tile_data == null:
+			return false
+		else:
+			var entities_at_target = levelgrid.get_entities_at_tile(target_tile)
+			for entity in entities_at_target:
+				if entity !=null:
+					if entity.height > height-2 and entity.height<= height:
+						if entity is Player:
+							return true
+						return false
+	return false

@@ -13,3 +13,4 @@ func _draw():
 		var end_point = Vector2(dir.x, dir.y) * 20.0 
 		
 		draw_line(start_point, end_point, Color.CHARTREUSE, 2.0)
+
