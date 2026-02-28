@@ -1,6 +1,8 @@
 extends Node
 class_name GridLiver
 
+
+
 var on_fire: bool = false
 
 func grid_update():
