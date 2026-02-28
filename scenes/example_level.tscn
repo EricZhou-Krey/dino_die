@@ -29,3 +29,11 @@ script = ExtResource("4_5mhal")
 [node name="Sprite2D" type="Sprite2D" parent="Rock"]
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("2_16hhj")
+
+[node name="Rock2" type="Node2D" parent="."]
+position = Vector2(88, 88)
+script = ExtResource("4_5mhal")
+
+[node name="Sprite2D" type="Sprite2D" parent="Rock2"]
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_16hhj")
