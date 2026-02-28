@@ -13,15 +13,17 @@ func _input(event):
 
 	for label in movement:
 		if event.is_action_pressed(label):
-			levelgrid.update.emit()
 			facing_direction = movement[label]
 			move(movement[label])
+			levelgrid.progress_time()
 	
 	if event.is_action_pressed("wait"):
-		levelgrid.update.emit()
+		levelgrid.progress_time()
 	if event.is_action_pressed("burn"):
 		var current_tile = levelgrid.local_to_map(global_position)
-		var entity = levelgrid.get_entity_at_tile(current_tile + facing_direction)
+		var entity = levelgrid.get_back_entity_at_tile(current_tile + facing_direction)
 		if entity != null and entity.has_method("burn"):
 			entity.burn()
-		levelgrid.update.emit()
+		levelgrid.progress_time()
+	if event.is_action_pressed("undo"):
+		levelgrid.revert()
