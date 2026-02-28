@@ -70,7 +70,6 @@ func move(direction: Vector2i) -> bool:
 		for entity_behind_target in entities_behind_target:
 			if levelgrid.unreachable(entity_behind_target.height, entity_at_target.height): continue
 			if entity_behind_target != null and not entity_behind_target.transparent and not entity_at_target.transparent:
-				print(entities_at_target, entities_behind_target)
 				return false
 		
 		if not(entity_at_target.move(direction)):

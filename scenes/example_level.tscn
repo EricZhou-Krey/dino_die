@@ -143,7 +143,6 @@ texture = ExtResource("2_16hhj")
 [node name="Dino2" type="Node2D" parent="."]
 position = Vector2(24, 120)
 script = ExtResource("7_2yi40")
-facing_direction = Vector2i(0, -1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Dino2"]
 scale = Vector2(0.125, 0.125)
