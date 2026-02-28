@@ -64,6 +64,8 @@ func move(direction: Vector2i) -> bool:
 				height -= 1
 			else:
 				return false
+		else:
+			return false
 	
 	for entity_at_target in entities_at_target:
 		var tile_behind_target = target_tile + direction
