@@ -2,6 +2,8 @@ extends GridLiver
 class_name Player
 
 @export var facing_direction: Vector2i = Vector2i.DOWN
+@export var available_tools : Array[Tool]
+var current_tool_index: int = 0
 
 func _input(event):
 	var movement = {
@@ -19,11 +21,9 @@ func _input(event):
 	
 	if event.is_action_pressed("wait"):
 		levelgrid.progress_time()
-	if event.is_action_pressed("burn"):
-		var current_tile = levelgrid.local_to_map(global_position)
-		var entity = levelgrid.get_back_entity_at_tile(current_tile + facing_direction)
-		if entity != null and entity.has_method("burn"):
-			entity.burn()
-		levelgrid.progress_time()
+	if event.is_action_pressed("change_tool") and available_tools != null:
+		current_tool_index = (current_tool_index+1)%available_tools.size()
+	if event.is_action_pressed("tool") and available_tools != null and available_tools[current_tool_index]!=null:
+		available_tools[current_tool_index].use_tool(global_position, facing_direction)
 	if event.is_action_pressed("undo"):
 		levelgrid.revert()
