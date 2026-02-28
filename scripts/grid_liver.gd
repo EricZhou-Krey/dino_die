@@ -52,30 +52,26 @@ func move(direction: Vector2i) -> bool:
 	if tile_data == null or tile_data.get_custom_data("walkable") == false:
 		return false
 	
-	var entities_at_target = levelgrid.get_entities_at_tile(target_tile)
-	
+	var new_height = height
 	var tile_height = tile_data.get_custom_data("height")
-	
 	if tile_height != height:
 		if pushable_uphill:
 			var from_tile = levelgrid.get_cell_tile_data(0, current_tile)
 			var slope_from = from_tile.get_custom_data("slope_direction")
 			var slope_to = tile_data.get_custom_data("slope_direction")
 			if height + 1 == tile_height and (slope_to == direction or slope_from == direction):
-				height += 1
+				new_height += 1
 			elif height - 1 == tile_height and (slope_to == -direction or slope_from == -direction):
-				height -= 1
+				new_height -= 1
 			else:
 				return false
-		#doesn't work
-		elif pushable_downhill:
-			if tile_height < height:
-				print(tile_height, height)
-				height = tile_height
-				print("attempt to push down")
+		elif pushable_downhill and tile_height < height:
+			if self is Rock: print(tile_height, height)
+			height = tile_height
 		else:
 			return false
 	
+	var entities_at_target = levelgrid.get_entities_at_tile(target_tile)
 	for entity_at_target in entities_at_target:
 		var tile_behind_target = target_tile + direction
 		var entities_behind_target = levelgrid.get_entities_at_tile(tile_behind_target)
@@ -89,6 +85,7 @@ func move(direction: Vector2i) -> bool:
 			if not(can_push) or not(entity_at_target.move(direction)):
 				return false
 	
+	height = new_height
 	levelgrid.remove_entity_at_tile(current_tile, self)
 	levelgrid.add_entity_at_tile(target_tile, self)
 	
