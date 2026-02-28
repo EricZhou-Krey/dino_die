@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6ftjaacs6inm"]
+[gd_scene format=3 uid="uid://b6ftjaacs6inm"]
 
 [ext_resource type="Script" path="res://scripts/entity/dino.gd" id="1_1se0i"]
 [ext_resource type="Texture2D" uid="uid://bvhmk5e7now6f" path="res://assets/Dino/BabyDino.png" id="2_o3uqq"]
