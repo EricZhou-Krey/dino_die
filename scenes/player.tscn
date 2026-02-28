@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://c26tjy751s1fy"]
+[gd_scene load_steps=49 format=3 uid="uid://c26tjy751s1fy"]
 
-[ext_resource type="Script" uid="uid://7tq73ldgy2rd" path="res://scripts/entity/player.gd" id="1_iw3mo"]
+[ext_resource type="Script" path="res://scripts/entity/player.gd" id="1_iw3mo"]
 [ext_resource type="Texture2D" uid="uid://bysqpgahi3mqs" path="res://assets/Characters/JanitorSheet.png" id="2_jk4pq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0txee"]
@@ -416,10 +416,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="Node2D" unique_id=1729375735]
+[node name="Player" type="Node2D"]
 script = ExtResource("1_iw3mo")
 available_tools = null
 facing_direction = null
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1643151981]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3aw3n")

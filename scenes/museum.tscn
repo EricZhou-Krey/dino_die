@@ -1,13 +1,3 @@
 [gd_scene format=3 uid="uid://b8sab8cspmd37"]
 
-[node name="Mesum" type="Control" unique_id=150430395]
-layout_mode = 3
-anchors_preset = 0
-
-[node name="Label" type="Label" parent="." unique_id=2083549634]
-layout_mode = 0
-offset_left = 522.0
-offset_top = 274.0
-offset_right = 590.0
-offset_bottom = 297.0
-text = "Museum"
+[node name="Mesum" type="Node2D"]
