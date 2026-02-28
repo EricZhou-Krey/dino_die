@@ -14,7 +14,6 @@ func _ready():
 func _set_facing_direction(direction: Vector2i):
 	facing_direction = direction
 
-
 func set_state(new_state: Dictionary):
 	super.set_state(new_state)
 	_set_facing_direction(state["facing_direction"])

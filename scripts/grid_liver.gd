@@ -61,7 +61,7 @@ func move(direction: Vector2i) -> bool:
 			var from_tile = levelgrid.get_cell_tile_data(0, current_tile)
 			var slope_from = from_tile.get_custom_data("slope_direction")
 			var slope_to = tile_data.get_custom_data("slope_direction")
-			print(height, self)
+
 			if height + 1 == tile_height and (slope_to == direction or slope_from == direction):
 				new_height += 1
 			elif height - 1 == tile_height and (slope_to == -direction or slope_from == -direction):

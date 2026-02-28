@@ -1,7 +1,9 @@
-[gd_scene load_steps=49 format=3 uid="uid://c26tjy751s1fy"]
+[gd_scene load_steps=51 format=3 uid="uid://c26tjy751s1fy"]
 
 [ext_resource type="Script" path="res://scripts/entity/player.gd" id="1_iw3mo"]
 [ext_resource type="Texture2D" uid="uid://bysqpgahi3mqs" path="res://assets/Characters/JanitorSheet.png" id="2_jk4pq"]
+[ext_resource type="Script" path="res://scripts/tools/torch.gd" id="3_78i0y"]
+[ext_resource type="Script" path="res://scripts/tools/hand.gd" id="3_i5ptl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0txee"]
 atlas = ExtResource("2_jk4pq")
@@ -23,33 +25,33 @@ region = Rect2(96, 0, 32, 32)
 atlas = ExtResource("2_jk4pq")
 region = Rect2(128, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2ct8b"]
-atlas = ExtResource("2_jk4pq")
-region = Rect2(160, 32, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ci1h4"]
 atlas = ExtResource("2_jk4pq")
 region = Rect2(160, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_84gcj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k7l4"]
 atlas = ExtResource("2_jk4pq")
-region = Rect2(128, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n8qje"]
-atlas = ExtResource("2_jk4pq")
-region = Rect2(96, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2sqm6"]
-atlas = ExtResource("2_jk4pq")
-region = Rect2(64, 32, 32, 32)
+region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7wlce"]
 atlas = ExtResource("2_jk4pq")
 region = Rect2(32, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5k7l4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sqm6"]
 atlas = ExtResource("2_jk4pq")
-region = Rect2(0, 32, 32, 32)
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8qje"]
+atlas = ExtResource("2_jk4pq")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ct8b"]
+atlas = ExtResource("2_jk4pq")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84gcj"]
+atlas = ExtResource("2_jk4pq")
+region = Rect2(128, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tvhtn"]
 atlas = ExtResource("2_jk4pq")
@@ -202,25 +204,25 @@ animations = [{
 "texture": SubResource("AtlasTexture_6qhw5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2ct8b")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_ci1h4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_84gcj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n8qje")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2sqm6")
+"texture": SubResource("AtlasTexture_5k7l4")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7wlce")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5k7l4")
+"texture": SubResource("AtlasTexture_2sqm6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8qje")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ct8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84gcj")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tvhtn")
@@ -418,8 +420,14 @@ animations = [{
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_iw3mo")
-available_tools = null
-facing_direction = null
+starting_tools = Array[String](["Hand", "Torch"])
+sprite_sheet_offsets = Array[int]([0, 6])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3aw3n")
+
+[node name="Hand" type="Node2D" parent="."]
+script = ExtResource("3_i5ptl")
+
+[node name="Torch" type="Node2D" parent="."]
+script = ExtResource("3_78i0y")

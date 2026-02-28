@@ -11,15 +11,13 @@ func _ready():
 	super._ready()
 	transparent = true
 	state["burn_timer"] = burn_timer
-	state["bush_state"] = bush_state#
-	state["rotation"] = rotation
+	state["bush_state"] = bush_state
 	if random_bush: sprite_2d.frame = randi_range(0, 4)
 
 func set_state(new_state: Dictionary):
 	super.set_state(new_state)
 	burn_timer = state["burn_timer"]
 	bush_state = state["bush_state"]
-	rotation = state["rotation"]
 	
 func move(_direction: Vector2i):
 	return true
@@ -32,7 +30,6 @@ func _update():
 	super._update()
 	state["burn_timer"] = burn_timer
 	state["bush_state"] = bush_state
-	state["rotation"] = rotation
 	
 	match bush_state:
 		State.PRE_BURNING:
