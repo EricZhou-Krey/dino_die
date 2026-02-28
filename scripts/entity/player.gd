@@ -1,8 +1,6 @@
 extends GridLiver
 class_name Player
 
-@export var facing_direction: Vector2i = Vector2i.DOWN
-
 func _input(event):
 	var movement = {
 		"left": Vector2i.LEFT,
