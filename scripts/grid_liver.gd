@@ -2,7 +2,7 @@ extends Node2D
 class_name GridLiver
 
 @onready var levelgrid: LevelGrid = $"../LevelGrid"
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var sprite_2d: AnimatedSprite2D = $"AnimatedSprite2D"
 @export var facing_direction: Vector2i = Vector2i.RIGHT
 @export var height = 0
 
@@ -48,6 +48,7 @@ func _physics_process(delta):
 func move(direction: Vector2i) -> bool:
 	var current_tile: Vector2i = levelgrid.local_to_map(global_position)
 	var target_tile: Vector2i = current_tile + direction
+	print(levelgrid)
 	
 	var tile_data: TileData = levelgrid.get_cell_tile_data(0, target_tile)
 	

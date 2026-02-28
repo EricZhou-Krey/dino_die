@@ -8,6 +8,7 @@ func _input(event):
 		"up": Vector2i.UP,
 		"down": Vector2i.DOWN,
 	}
+	
 	for label in movement:
 		if event.is_action_pressed(label):
 			facing_direction = movement[label]
@@ -19,7 +20,6 @@ func _input(event):
 	if event.is_action_pressed("burn"):
 		var current_tile = levelgrid.local_to_map(global_position)
 		var entities = levelgrid.get_entities_at_tile(current_tile + facing_direction)
-		
 		for entity in entities:
 			if entity != null and not(levelgrid.unreachable(entity.height, height)) and entity.has_method("burn"):
 				entity.burn()

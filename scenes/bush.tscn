@@ -1,13 +1,68 @@
-[gd_scene load_steps=3 format=3 uid="uid://c43fg4m4xmkc2"]
+[gd_scene load_steps=13 format=3 uid="uid://c43fg4m4xmkc2"]
 
 [ext_resource type="Script" path="res://scripts/entity/bush.gd" id="1_2hb3u"]
+[ext_resource type="Texture2D" uid="uid://c35yhlvhcuen3" path="res://assets/Bushes/Bush1-1.png" id="2_rrhk0"]
+[ext_resource type="Texture2D" uid="uid://bqmdnc78yl44e" path="res://assets/Bushes/Bush2.png" id="2_vfeh6"]
+[ext_resource type="Texture2D" uid="uid://c3nq43go5dhtj" path="res://assets/Bushes/Bush2-1.png" id="4_daoco"]
+[ext_resource type="Texture2D" uid="uid://cps4f80l8cb7s" path="res://assets/Bushes/Bush1-3.png" id="5_q54a7"]
+[ext_resource type="Texture2D" uid="uid://cby5o6d74mbio" path="res://assets/Bushes/Bush1-2.png" id="6_pdyfg"]
+[ext_resource type="Texture2D" uid="uid://dj5phurywikqf" path="res://assets/Bushes/Flame.png" id="7_yaga0"]
+[ext_resource type="Texture2D" uid="uid://dqrykhwxpjcua" path="res://assets/Bushes/Bush3.png" id="8_ogv5d"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mrk1v"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mbb7"]
+atlas = ExtResource("7_yaga0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6bgc"]
+atlas = ExtResource("7_yaga0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snlkx"]
+atlas = ExtResource("7_yaga0")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_12i6q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mbb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6bgc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snlkx")
+}],
+"loop": true,
+"name": &"burning",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vfeh6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rrhk0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_daoco")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_q54a7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_pdyfg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ogv5d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Bush" type="Node2D"]
-position = Vector2(152, 40)
 script = ExtResource("1_2hb3u")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(16, 16)
-texture = SubResource("PlaceholderTexture2D_mrk1v")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_12i6q")

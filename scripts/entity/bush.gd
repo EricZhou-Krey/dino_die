@@ -2,6 +2,7 @@ extends GridLiver
 class_name Bush
 
 @export var burn_timer = 3
+@export var random_bush = true
 var burn_directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
 enum State { FRESH, PRE_BURNING, BURNING, BURNT }
 var bush_state = State.FRESH
@@ -12,6 +13,7 @@ func _ready():
 	state["burn_timer"] = burn_timer
 	state["bush_state"] = bush_state#
 	state["rotation"] = rotation
+	if random_bush: sprite_2d.frame = randi_range(0, 4)
 
 func set_state(new_state: Dictionary):
 	super.set_state(new_state)
@@ -25,8 +27,6 @@ func move(_direction: Vector2i):
 func burn():
 	if bush_state == State.FRESH:
 		bush_state = State.PRE_BURNING
-		#change visual
-		rotation = 15
 
 func _update():
 	super._update()
@@ -37,7 +37,8 @@ func _update():
 	match bush_state:
 		State.PRE_BURNING:
 			bush_state = State.BURNING
-			rotation = 25
+			sprite_2d.play("burning")
+			
 		State.BURNING:
 			var current_tile = levelgrid.local_to_map(global_position)
 			for direction in burn_directions:
@@ -50,5 +51,8 @@ func _update():
 			burn_timer -= 1
 			if burn_timer == 0:
 				bush_state = State.BURNT
-				rotation = 45
+				sprite_2d.play("default")
+				sprite_2d.stop()
+				sprite_2d.frame = 5
+				
 	
