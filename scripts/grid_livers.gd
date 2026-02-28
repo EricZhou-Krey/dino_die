@@ -18,10 +18,16 @@ func move(direction: Vector2i) -> bool:
 	var tile_data: TileData = levelgrid.get_cell_tile_data(0, target_tile)
 	
 	if tile_data == null or tile_data.get_custom_data("walkable") == false:
-		return false	
+		return false
 	
 	var entity_at_target = levelgrid.get_entity_at_tile(target_tile)
 	if entity_at_target != null:
+		var tile_behind_target = target_tile + direction
+		var entity_behind_target = levelgrid.get_entity_at_tile(tile_behind_target)
+		
+		if entity_behind_target != null:
+			return false
+			
 		if not(entity_at_target.move(direction)):
 			return false
 		
