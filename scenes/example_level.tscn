@@ -141,16 +141,10 @@ position = Vector2(272, 112)
 position = Vector2(144, 112)
 
 [node name="Dino" parent="." instance=ExtResource("9_upcb7")]
-position = Vector2(112, 176)
-
-[node name="Dino2" parent="." instance=ExtResource("9_upcb7")]
-position = Vector2(48, 112)
-dino_size = 1
-
-[node name="Dino3" parent="." instance=ExtResource("9_upcb7")]
-position = Vector2(80, 272)
-dino_size = 2
+position = Vector2(48, 48)
+facing_direction = Vector2i(0, 0)
 
 [node name="LoseOverlay" parent="." instance=ExtResource("9_i6cj8")]
+visible = false
 position = Vector2(688, 128)
 scale = Vector2(16, 16)
