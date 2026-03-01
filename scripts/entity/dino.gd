@@ -11,7 +11,7 @@ enum Size { SMALL, MID, BIG }
 func _ready():
 	super._ready()
 	if dino_size == Size.SMALL: transparent = true
-	if dino_size == Size.BIG: can_push = false
+	can_push = false
 	_set_facing_direction(facing_direction)
 	state["facing_direction"] = facing_direction
 	
@@ -37,10 +37,11 @@ func _update():
 		Vector2i.DOWN:
 			sprite_2d.frame = 0
 
-	check_sight()
+	check_sight_player()
 	if not(move(facing_direction)):
 		_set_facing_direction(-facing_direction)
-	check_sight()
+	check_sight_player()
+	check_sight_entity()
 	eat_entities()
 
 func eat_entities():
@@ -56,7 +57,7 @@ func eat_entities():
 			if entity != null and (entity is Player or entity is Food):
 				print(self, "has eaten", entity)
 				
-func check_sight():
+func check_sight_player():
 	var directions: Array[Vector2i] = [facing_direction]
 	var leftDir : Vector2i = Vector2i(facing_direction.y, facing_direction.x)
 	var rightDir: Vector2i = Vector2i(-facing_direction.y, -facing_direction.x)
@@ -67,10 +68,22 @@ func check_sight():
 		if seen_entity is Player:
 			print("player spotted by dino")
 			return
+			
+func check_sight_entity():
+	var directions: Array[Vector2i] = [facing_direction]
+	var leftDir : Vector2i = Vector2i(facing_direction.y, facing_direction.x)
+	var rightDir: Vector2i = Vector2i(-facing_direction.y, -facing_direction.x)
+	directions.append(leftDir)
+	directions.append(rightDir)
+	for direction in directions:
+		var seen_entity = check_sight_direction(direction)
 		if seen_entity is Bush and seen_entity.bush_state == seen_entity.State.BURNING:
+			print("moving away fire")
 			_set_facing_direction(-direction)
-		if seen_entity is Dino and seen_entity.dino_size == Size.SMALL:
-			_set_facing_direction(-direction)
+		if seen_entity is Dino and seen_entity.dino_size == Size.SMALL and dino_size != Size.SMALL:
+			_set_facing_direction(direction)
+		if seen_entity is Dino and seen_entity.dino_size == Size.MID and dino_size == Size.BIG:
+			_set_facing_direction(direction)
 	
 	
 func check_sight_direction(direction: Vector2i)-> GridLiver:

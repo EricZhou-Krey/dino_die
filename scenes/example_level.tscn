@@ -131,8 +131,11 @@ position = Vector2(80, 48)
 [node name="Bush3" parent="." instance=ExtResource("7_m75qw")]
 position = Vector2(112, 48)
 
+[node name="Bush4" parent="." instance=ExtResource("7_m75qw")]
+position = Vector2(144, 48)
+
 [node name="Rock" parent="." instance=ExtResource("4_1j85w")]
-position = Vector2(272, 112)
+position = Vector2(144, 112)
 
 [node name="Rock2" parent="." instance=ExtResource("4_1j85w")]
 position = Vector2(240, 176)
@@ -147,7 +150,14 @@ height = 2
 
 [node name="Dino" parent="." instance=ExtResource("9_upcb7")]
 position = Vector2(112, 176)
+
+[node name="Dino2" parent="." instance=ExtResource("9_upcb7")]
+position = Vector2(48, 112)
 dino_size = 1
 
+[node name="Dino3" parent="." instance=ExtResource("9_upcb7")]
+position = Vector2(80, 272)
+dino_size = 2
+
 [node name="Player" parent="." instance=ExtResource("3_l43yc")]
-position = Vector2(144, 112)
+position = Vector2(176, 80)

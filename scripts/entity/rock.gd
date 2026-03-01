@@ -15,5 +15,6 @@ func _update():
 		if entity is Dino and entity.get_parent() != null:
 			entity._update()
 			get_parent().remove_child(entity)
-			bloodgrid.set_cell(0, current_tile, -1, Vector2i(0,0))
+			bloodgrid.set_cell(0, current_tile, 0, Vector2i(0,0))
+
 	super._update()

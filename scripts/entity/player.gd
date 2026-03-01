@@ -30,7 +30,7 @@ func _input(event):
 		levelgrid.progress_time()
 	if event.is_action_pressed("change_tool"):
 		current_tool_index = (current_tool_index+1)%available_tools.size()
-		_update_sprite()
+		_update_sprite() 
 	if event.is_action_pressed("use_tool"):
 		available_tools[current_tool_index].use_tool(self)
 	if event.is_action_pressed("undo"):
