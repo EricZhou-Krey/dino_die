@@ -1,6 +1,7 @@
 extends TileMap
 class_name LevelGrid
 
+@onready var bloodgrid: TileMap = $"../BloodGrid"
 var entities: Array[Array] = []
 var grid_size: Vector2i
 var offset: Vector2i
@@ -33,6 +34,9 @@ func revert():
 	for entity in previous_states:
 		var parent = get_parent()
 		if not(entity in parent.get_children()):
+			if entity is Dino:
+				var dino_tile = local_to_map(entity.global_position)
+				bloodgrid.set_cell(0, dino_tile, -1, Vector2i(-1,-1))
 			parent.add_child(entity)
 		entity.set_state(previous_states[entity])
 	entity_time -= 1
@@ -43,6 +47,7 @@ func reset():
 	entity_history.clear()
 	for entity in previous_states:
 		var parent = get_parent()
+		bloodgrid.clear()
 		if not(entity in parent.get_children()):
 			parent.add_child(entity)
 		entity.set_state(previous_states[entity])
