@@ -1,17 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://b30qd50q2sbod"]
+[gd_scene load_steps=6 format=3 uid="uid://b30qd50q2sbod"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://bvhmk5e7now6f" path="res://assets/Dino/BabyDino.png" id="2_mcedx"]
 
-[sub_resource type="Animation" id="Animation_evrlg"]
+[sub_resource type="Animation" id="Animation_skamu"]
 resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
-[sub_resource type="Animation" id="Animation_2hu6h"]
+[sub_resource type="Animation" id="Animation_a5kg6"]
 resource_name = "fade_out"
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kptiq"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_odldb"]
 _data = {
-"fade_in": SubResource("Animation_evrlg"),
-"fade_out": SubResource("Animation_2hu6h")
+"fade_in": SubResource("Animation_skamu"),
+"fade_out": SubResource("Animation_a5kg6")
 }
 
 [node name="MainMenu" type="Control"]
@@ -74,11 +87,6 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="fade_transition"]
-libraries = {
-"": SubResource("AnimationLibrary_kptiq")
-}
-
 [node name="fade_in" type="Timer" parent="fade_transition"]
 wait_time = 0.5
 one_shot = true
@@ -87,6 +95,19 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="fade_transition"]
+libraries = {
+"": SubResource("AnimationLibrary_odldb")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(816, 176)
+scale = Vector2(20, 20)
+texture = ExtResource("2_mcedx")
+
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="timeout" from="fade_transition/fade_in" to="." method="_on_fade_in_timeout"]
+[connection signal="timeout" from="fade_transition/fade_out" to="." method="_on_fade_out_timeout"]
