@@ -138,6 +138,9 @@ position = Vector2(272, 112)
 position = Vector2(240, 176)
 height = 2
 
+[node name="Rock4" parent="." instance=ExtResource("4_1j85w")]
+position = Vector2(144, 144)
+
 [node name="Rock3" parent="." instance=ExtResource("4_1j85w")]
 position = Vector2(272, 144)
 height = 2
