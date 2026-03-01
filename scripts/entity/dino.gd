@@ -3,11 +3,15 @@ class_name Dino
 
 @export var target = false
 var eat_directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
+enum Size { SMALL, MID, BIG }
+
+@export var dino_size = Size.SMALL
+
 
 func _ready():
 	super._ready()
-	transparent = true
-	can_push = false
+	if dino_size == Size.SMALL: transparent = true
+	if dino_size == Size.BIG: can_push = false
 	_set_facing_direction(facing_direction)
 	state["facing_direction"] = facing_direction
 	
@@ -64,6 +68,8 @@ func check_sight():
 			print("player spotted by dino")
 			return
 		if seen_entity is Bush and seen_entity.bush_state == seen_entity.State.BURNING:
+			_set_facing_direction(-direction)
+		if seen_entity is Dino and seen_entity.dino_size == Size.SMALL:
 			_set_facing_direction(-direction)
 	
 	
