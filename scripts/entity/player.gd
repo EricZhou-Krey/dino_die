@@ -7,6 +7,7 @@ var available_tools: Array[Tool] = []
 var sprite_animate_index: int = 0
 var current_tool_index: int = 0
 var is_dead = false
+@export var next_scene: String
 
 
 func _ready():
@@ -75,7 +76,7 @@ func _update():
 			if entity is Dino and entity.target:
 				won = false
 		if won:
-			print("win")
+			get_tree().change_scene_to_file("res://scenes/"+next_scene+".tscn")
 	
 	var entities = levelgrid.get_entities_at_tile(current_tile)
 	for entity in entities:

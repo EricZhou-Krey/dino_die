@@ -1,0 +1,144 @@
+[gd_scene load_steps=15 format=3 uid="uid://da2nanfvu0bj"]
+
+[ext_resource type="Texture2D" uid="uid://cfidoaxoxictl" path="res://assets/Grass/GrassBackground.png" id="1_1405j"]
+[ext_resource type="Texture2D" uid="uid://cy0civb02g1it" path="res://icon.svg" id="2_ivlpf"]
+[ext_resource type="Script" path="res://scripts/level_grid.gd" id="3_gmd7o"]
+[ext_resource type="Texture2D" uid="uid://cxf47gxl24cte" path="res://assets/Grass/Blood.png" id="4_0eqsl"]
+[ext_resource type="PackedScene" uid="uid://c43fg4m4xmkc2" path="res://scenes/bush.tscn" id="5_sufmp"]
+[ext_resource type="PackedScene" uid="uid://c26tjy751s1fy" path="res://scenes/player.tscn" id="6_ilcng"]
+[ext_resource type="PackedScene" uid="uid://6crmo5mk05xo" path="res://scenes/rock.tscn" id="7_6vgnj"]
+[ext_resource type="PackedScene" uid="uid://b6ftjaacs6inm" path="res://scenes/dino.tscn" id="8_hcsjw"]
+[ext_resource type="PackedScene" uid="uid://b5d0wwp37l3oi" path="res://scenes/lose_overlay.tscn" id="9_kpybc"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wlxdp"]
+texture = ExtResource("1_1405j")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+1:0/0 = 0
+1:0/0/custom_data_0 = true
+2:0/0 = 0
+2:0/0/custom_data_0 = true
+3:0/0 = 0
+3:0/0/custom_data_0 = true
+4:0/0 = 0
+4:0/0/custom_data_0 = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l7ugx"]
+texture = ExtResource("2_ivlpf")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+0:0/0/custom_data_1 = 1
+0:0/0/custom_data_2 = Vector2i(1, 0)
+1:0/0 = 0
+1:0/0/custom_data_0 = true
+1:0/0/custom_data_1 = 1
+1:0/0/custom_data_2 = Vector2i(1, 0)
+2:0/0 = 0
+2:0/0/custom_data_0 = true
+2:0/0/custom_data_1 = 1
+2:0/0/custom_data_2 = Vector2i(1, 0)
+3:0/0 = 0
+3:0/0/custom_data_0 = true
+3:0/0/custom_data_1 = 1
+3:0/0/custom_data_2 = Vector2i(1, 0)
+0:1/0 = 0
+0:1/0/custom_data_0 = true
+0:1/0/custom_data_1 = 1
+0:1/0/custom_data_2 = Vector2i(1, 0)
+1:1/0 = 0
+1:1/0/custom_data_0 = true
+1:1/0/custom_data_1 = 2
+2:1/0 = 0
+2:1/0/custom_data_0 = true
+2:1/0/custom_data_1 = 2
+3:1/0 = 0
+3:1/0/custom_data_0 = true
+3:1/0/custom_data_1 = 1
+3:1/0/custom_data_2 = Vector2i(1, 0)
+0:2/0 = 0
+0:2/0/custom_data_0 = true
+0:2/0/custom_data_1 = 1
+0:2/0/custom_data_2 = Vector2i(1, 0)
+1:2/0 = 0
+1:2/0/custom_data_0 = true
+1:2/0/custom_data_1 = 2
+2:2/0 = 0
+2:2/0/custom_data_0 = true
+2:2/0/custom_data_1 = 2
+3:2/0 = 0
+3:2/0/custom_data_0 = true
+3:2/0/custom_data_1 = 1
+3:2/0/custom_data_2 = Vector2i(1, 0)
+0:3/0 = 0
+0:3/0/custom_data_0 = true
+0:3/0/custom_data_1 = 1
+0:3/0/custom_data_2 = Vector2i(1, 0)
+1:3/0 = 0
+1:3/0/custom_data_0 = true
+1:3/0/custom_data_3 = true
+2:3/0 = 0
+2:3/0/custom_data_0 = true
+2:3/0/custom_data_1 = 1
+2:3/0/custom_data_2 = Vector2i(1, 0)
+3:3/0 = 0
+3:3/0/custom_data_0 = true
+3:3/0/custom_data_1 = 1
+3:3/0/custom_data_2 = Vector2i(1, 0)
+
+[sub_resource type="TileSet" id="TileSet_wdgno"]
+tile_size = Vector2i(32, 32)
+custom_data_layer_0/name = "walkable"
+custom_data_layer_0/type = 1
+custom_data_layer_1/name = "height"
+custom_data_layer_1/type = 2
+custom_data_layer_2/name = "slope_direction"
+custom_data_layer_2/type = 6
+custom_data_layer_3/name = "win_tile"
+custom_data_layer_3/type = 1
+sources/1 = SubResource("TileSetAtlasSource_wlxdp")
+sources/2 = SubResource("TileSetAtlasSource_l7ugx")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1no68"]
+texture = ExtResource("4_0eqsl")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_lym4q"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_1no68")
+
+[node name="ExampleLevel" type="Node2D"]
+
+[node name="LevelGrid" type="TileMap" parent="."]
+position = Vector2(0, -1)
+tile_set = SubResource("TileSet_wdgno")
+format = 2
+layer_0/tile_data = PackedInt32Array(196610, 1, 0, 196609, 1, 0, 196608, 131073, 0, 262144, 196609, 0, 262145, 65538, 3, 262146, 1, 0, 2, 65537, 0, 1, 65537, 0, 0, 65537, 0, 65536, 65537, 0, 131073, 65537, 0, 131074, 65537, 0, 65538, 65537, 0, 65537, 65537, 0, 131072, 65537, 0)
+script = ExtResource("3_gmd7o")
+
+[node name="BloodGrid" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_lym4q")
+format = 2
+
+[node name="Bush" parent="." instance=ExtResource("5_sufmp")]
+position = Vector2(80, 16)
+
+[node name="Player" parent="." instance=ExtResource("6_ilcng")]
+position = Vector2(48, 144)
+next_scene = "Level 2"
+
+[node name="Rock" parent="." instance=ExtResource("7_6vgnj")]
+position = Vector2(48, 80)
+
+[node name="Dino2" parent="." instance=ExtResource("8_hcsjw")]
+position = Vector2(48, 48)
+target = true
+
+[node name="LoseOverlay" parent="." instance=ExtResource("9_kpybc")]
+position = Vector2(48, 80)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(48, 80)
+zoom = Vector2(2, 2)

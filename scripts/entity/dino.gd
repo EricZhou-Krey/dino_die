@@ -40,10 +40,10 @@ func _update():
 	var current_tile = levelgrid.local_to_map(global_position)
 	var entities = levelgrid.get_entities_at_tile(current_tile)
 	for entity in entities:
-		if entity is Bush and entity.bush_state == entity.State.BURNING:
+		if (entity is Bush and entity.bush_state == entity.State.BURNING) or entity is Rock:
 			if get_parent() != null:
 				get_parent().remove_child(self)
-			return 
+			return
 
 	check_sight_player()
 	if not(move(facing_direction)):
@@ -74,7 +74,7 @@ func check_sight_player():
 	directions.append(rightDir)
 	for direction in directions:
 		var seen_entity = check_sight_direction(direction)
-		if seen_entity is Player:
+		if seen_entity is Player and get_parent() != null:
 			seen_entity.is_dead = true
 			$"../LoseOverlay/AnimationPlayer".play("dino_js")
 			
