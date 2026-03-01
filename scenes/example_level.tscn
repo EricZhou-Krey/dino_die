@@ -151,6 +151,3 @@ dino_size = 1
 [node name="Dino3" parent="." unique_id=1303006827 instance=ExtResource("9_upcb7")]
 position = Vector2(80, 272)
 dino_size = 2
-
-[node name="Player2" parent="." unique_id=1695721179 instance=ExtResource("3_l43yc")]
-position = Vector2(176, 80)
