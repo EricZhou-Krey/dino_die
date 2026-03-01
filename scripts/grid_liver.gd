@@ -97,7 +97,7 @@ func move(direction: Vector2i) -> bool:
 				not(entity_behind_target is Dino and entity_behind_target.dino_size == entity_behind_target.Size.MID) and \
 				not(levelgrid.unreachable(entity_behind_target.height, height)):
 				return false
-        
+		
 		if not(entity_at_target.isTransparent(self)):
 			if not(can_push) or not(entity_at_target.move(direction)):
 				return false
