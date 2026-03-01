@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://j1r31cjq4isl"]
 
 [ext_resource type="Texture2D" uid="uid://cfidoaxoxictl" path="res://assets/Grass/GrassBackground.png" id="1_0xorp"]
+[ext_resource type="Texture2D" uid="uid://cy0civb02g1it" path="res://icon.svg" id="2_qeegb"]
 [ext_resource type="Script" uid="uid://e06xkrogl146" path="res://scripts/level_grid.gd" id="2_st301"]
 [ext_resource type="Texture2D" uid="uid://cxf47gxl24cte" path="res://assets/Grass/Blood.png" id="3_csmf4"]
 [ext_resource type="PackedScene" uid="uid://c26tjy751s1fy" path="res://scenes/player.tscn" id="3_l43yc"]
@@ -143,13 +144,13 @@ position = Vector2(272, 112)
 [node name="Dino" parent="." unique_id=58734462 instance=ExtResource("9_upcb7")]
 position = Vector2(112, 176)
 
-[node name="Dino2" parent="." instance=ExtResource("9_upcb7")]
+[node name="Dino2" parent="." unique_id=25289080 instance=ExtResource("9_upcb7")]
 position = Vector2(48, 112)
 dino_size = 1
 
-[node name="Dino3" parent="." instance=ExtResource("9_upcb7")]
+[node name="Dino3" parent="." unique_id=1303006827 instance=ExtResource("9_upcb7")]
 position = Vector2(80, 272)
 dino_size = 2
 
-[node name="Player" parent="." instance=ExtResource("3_l43yc")]
+[node name="Player2" parent="." unique_id=1695721179 instance=ExtResource("3_l43yc")]
 position = Vector2(176, 80)
