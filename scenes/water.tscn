@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://boso60q5juoey"]
+
+[ext_resource type="Texture2D" uid="uid://cy0civb02g1it" path="res://icon.svg" id="1_bdk6y"]
+[ext_resource type="Script" uid="uid://tmst8nw5jaif" path="res://scripts/entity/water.gd" id="1_s3811"]
+[ext_resource type="Texture2D" uid="uid://cxf47gxl24cte" path="res://assets/Grass/Blood.png" id="3_p1n2c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3811"]
+atlas = ExtResource("1_bdk6y")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewrsg"]
+atlas = ExtResource("3_p1n2c")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p1n2c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3811")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewrsg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Water" type="Node2D" unique_id=1142292084]
+script = ExtResource("1_s3811")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=615371080]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_p1n2c")

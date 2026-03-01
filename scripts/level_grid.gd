@@ -67,3 +67,6 @@ func remove_entity_at_tile(tile: Vector2i, entity: GridLiver):
 
 func unreachable(h_a: int, h_b: int):
 	return h_a != h_b and h_a != h_b + 1 and h_a != h_b - 1
+
+func unreachable_down(h_a: int, h_b: int):
+	return h_a != h_b and h_a != h_b -2 and h_a != h_b - 1

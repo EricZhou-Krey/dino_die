@@ -44,7 +44,10 @@ func set_state(new_state: Dictionary):
 
 func _physics_process(delta):
 	sprite_2d.global_position = sprite_2d.global_position.move_toward(global_position, 2)
-	
+
+func isTransparent(entity: GridLiver):
+	return transparent
+
 func move(direction: Vector2i) -> bool:
 	var current_tile: Vector2i = levelgrid.local_to_map(global_position)
 	var target_tile: Vector2i = current_tile + direction
@@ -94,11 +97,8 @@ func move(direction: Vector2i) -> bool:
 				not(entity_behind_target is Dino and entity_behind_target.dino_size == entity_behind_target.Size.MID) and \
 				not(levelgrid.unreachable(entity_behind_target.height, height)):
 				return false
-				
-		if self is Dino and self.dino_size == self.Size.MID:
-			return false
-			
-		if not(entity_at_target.transparent or levelgrid.unreachable(entity_at_target.height, height)):
+        
+		if not(entity_at_target.isTransparent(self)):
 			if not(can_push) or not(entity_at_target.move(direction)):
 				return false
 				
