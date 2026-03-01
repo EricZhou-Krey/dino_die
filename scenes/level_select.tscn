@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://c2dk40tvb5jcp"]
+
+[ext_resource type="Texture2D" uid="uid://cy0civb02g1it" path="res://icon.svg" id="1_3shnc"]
+[ext_resource type="Script" path="res://scenes/level_select.gd" id="1_p0wlc"]
+[ext_resource type="PackedScene" uid="uid://cu3yjvclbuwev" path="res://scenes/fade_in_fade_out.tscn" id="2_2epne"]
+[ext_resource type="Script" path="res://scenes/camera_2d.gd" id="2_rif6e"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="5_chg43"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r77uv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4nqmc"]
+
+[node name="LevelSelect" type="Node2D" unique_id=174940818]
+script = ExtResource("1_p0wlc")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1092766633]
+script = ExtResource("2_rif6e")
+
+[node name="fade_transition" parent="Camera2D" unique_id=2124831508 instance=ExtResource("2_2epne")]
+visible = false
+offset_left = -592.0
+offset_top = -356.0
+offset_right = 592.0
+offset_bottom = 338.0
+
+[node name="Exit" type="Area2D" parent="." unique_id=618673518]
+position = Vector2(-290, -26)
+scale = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit" unique_id=1720839995]
+shape = SubResource("RectangleShape2D_r77uv")
+
+[node name="Sprite2D" type="Sprite2D" parent="Exit" unique_id=624007108]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_3shnc")
+
+[node name="Example_level" type="Area2D" parent="." unique_id=826166790]
+position = Vector2(308, -25)
+scale = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Example_level" unique_id=686029142]
+shape = SubResource("RectangleShape2D_r77uv")
+
+[node name="Sprite2D" type="Sprite2D" parent="Example_level" unique_id=421189805]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_3shnc")
+
+[node name="Player" type="Node2D" parent="." unique_id=1143427149]
+script = ExtResource("5_chg43")
+speed = 150
+
+[node name="Player_area" type="Area2D" parent="Player" unique_id=190233822]
+position = Vector2(-1, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Player_area" unique_id=474279725]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_4nqmc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Player_area" unique_id=1398857379]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_3shnc")
+
+[connection signal="area_entered" from="Player/Player_area" to="Player" method="_on_player_area_area_entered"]

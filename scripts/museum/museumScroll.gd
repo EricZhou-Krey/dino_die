@@ -4,7 +4,7 @@ class_name MuseumScroll
 @onready var museumgrid: LevelGrid = $"../LevelGrid"
 @onready var sprite_2d: AnimatedSprite2D = $"AnimatedSprite2D"
 
-# Called when the node enters the scene tree for the first time.
+# Called when the node enters the scene 	tree for the first time.
 func _ready() -> void:
 	var current_tile: Vector2i = museumgrid.local_to_map(global_position) 
 	#pass # Replace with function body.

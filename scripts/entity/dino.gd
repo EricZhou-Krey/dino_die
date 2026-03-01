@@ -78,7 +78,6 @@ func check_sight_entity():
 	for direction in directions:
 		var seen_entity = check_sight_direction(direction)
 		if seen_entity is Bush and seen_entity.bush_state == seen_entity.State.BURNING:
-			print("moving away fire")
 			_set_facing_direction(-direction)
 		if seen_entity is Dino and seen_entity.dino_size == Size.SMALL and dino_size != Size.SMALL:
 			_set_facing_direction(direction)
@@ -97,6 +96,8 @@ func check_sight_direction(direction: Vector2i)-> GridLiver:
 		if tile_data == null:
 			return null
 		else:
+			if tile_data.get_custom_data("height") != height:
+				return null
 			var entities_at_target = levelgrid.get_entities_at_tile(target_tile)
 			for entity in entities_at_target:
 				if entity !=null:
