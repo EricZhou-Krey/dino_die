@@ -1,7 +1,7 @@
 extends Node2D
 class_name MuseumScroll
 
-@onready var museumgrid: TileMap = $"../TileMap"
+@onready var museumgrid: LevelGrid = $"../LevelGrid"
 @onready var sprite_2d: AnimatedSprite2D = $"AnimatedSprite2D"
 
 # Called when the node enters the scene 	tree for the first time.

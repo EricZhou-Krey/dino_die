@@ -3,7 +3,10 @@
 [ext_resource type="Script" path="res://scripts/museum/museumScroll.gd" id="1_5qjhm"]
 [ext_resource type="Texture2D" uid="uid://cy0civb02g1it" path="res://icon.svg" id="2_kf0j1"]
 [ext_resource type="PackedScene" uid="uid://c26tjy751s1fy" path="res://scenes/player.tscn" id="3_kf0j1"]
-[ext_resource type="Script" path="res://scripts/museum/playerMuseum.gd" id="4_4kxtc"]
+[ext_resource type="Script" uid="uid://cxlvnh750o034" path="res://scripts/museum/playerMuseum.gd" id="4_4kxtc"]
+[ext_resource type="Script" uid="uid://e06xkrogl146" path="res://scripts/level_grid.gd" id="5_bsa01"]
+[ext_resource type="Script" uid="uid://c183tsvkjpw0v" path="res://scripts/text/animatedtext.gd" id="6_a7gvg"]
+[ext_resource type="FontFile" uid="uid://ddjy5swvs4bp2" path="res://assets/fonts/PixelifySans-Regular.ttf" id="6_lt1qg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4kxtc"]
 atlas = ExtResource("2_kf0j1")
@@ -90,20 +93,47 @@ texture = ExtResource("2_kf0j1")
 [sub_resource type="TileSet" id="TileSet_kf0j1"]
 sources/0 = SubResource("TileSetAtlasSource_5qjhm")
 
-[node name="Museum" type="Node2D"]
+[node name="Museum" type="Node2D" unique_id=1239884299]
 
-[node name="MuseumScroll" type="Node2D" parent="."]
+[node name="MuseumScroll" type="Node2D" parent="." unique_id=1468369180]
 position = Vector2(0, 64)
 script = ExtResource("1_5qjhm")
 metadata/_custom_type_script = "uid://bjfdckwepg6uu"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MuseumScroll"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MuseumScroll" unique_id=600134978]
 sprite_frames = SubResource("SpriteFrames_ni2ep")
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="BloodGrid" type="TileMap" parent="." unique_id=1220163698]
 tile_set = SubResource("TileSet_kf0j1")
 format = 2
 
-[node name="Player" parent="." instance=ExtResource("3_kf0j1")]
+[node name="Player" parent="." unique_id=1819701482 instance=ExtResource("3_kf0j1")]
 position = Vector2(96, 64)
 script = ExtResource("4_4kxtc")
+
+[node name="LevelGrid" type="TileMap" parent="." unique_id=1244988418]
+format = 2
+script = ExtResource("5_bsa01")
+metadata/_custom_type_script = "uid://e06xkrogl146"
+
+[node name="RichTextLabelAnimated" type="RichTextLabel" parent="." unique_id=1594411554]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = 160.0
+offset_right = 288.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("6_lt1qg")
+fit_content = true
+scroll_active = false
+autowrap_trim_flags = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_a7gvg")
+text_to_display = Array[String](["A janitor roams the halls of a museum.", "Empty glass cases and boring plaques.", "\"The dinosaur is dead\"", "No one visits.", "Perhaps the museum might shut down soon.", "\"No, I won't stand for that\"", "\"I'll make this museum the most exciting there's ever been!\"", "(and keep my job)", "The janitor walks into his time machine (the janitor closet)"])
+metadata/_custom_type_script = "uid://c183tsvkjpw0v"
