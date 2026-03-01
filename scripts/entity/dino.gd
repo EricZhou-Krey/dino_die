@@ -36,6 +36,14 @@ func _update():
 			sprite_2d.frame = 2
 		Vector2i.DOWN:
 			sprite_2d.frame = 0
+			
+	var current_tile = levelgrid.local_to_map(global_position)
+	var entities = levelgrid.get_entities_at_tile(current_tile)
+	for entity in entities:
+		if (entity is Bush and entity.bush_state == entity.State.BURNING) or entity is Rock:
+			if get_parent() != null:
+				get_parent().remove_child(self)
+			return
 
 	check_sight_player()
 	if not(move(facing_direction)):
@@ -55,7 +63,8 @@ func eat_entities():
 		for entity in entities:
 			if levelgrid.unreachable(entity.height, height): continue
 			if entity != null and (entity is Player or entity is Food):
-				print(self, "has eaten", entity)
+				entity.is_dead = true
+				$"../LoseOverlay/AnimationPlayer".play("dino_js")
 				
 func check_sight_player():
 	var directions: Array[Vector2i] = [facing_direction]
@@ -65,9 +74,9 @@ func check_sight_player():
 	directions.append(rightDir)
 	for direction in directions:
 		var seen_entity = check_sight_direction(direction)
-		if seen_entity is Player:
-			print("player spotted by dino")
-			return
+		if seen_entity is Player and get_parent() != null:
+			seen_entity.is_dead = true
+			$"../LoseOverlay/AnimationPlayer".play("dino_js")
 			
 func check_sight_entity():
 	var directions: Array[Vector2i] = [facing_direction]

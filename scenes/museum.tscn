@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://b8sab8cspmd37"]
+[gd_scene load_steps=9 format=3 uid="uid://b8sab8cspmd37"]
 
-[ext_resource type="Script" uid="uid://bjfdckwepg6uu" path="res://scripts/museum/museumScroll.gd" id="1_5qjhm"]
+[ext_resource type="Script" path="res://scripts/museum/museumScroll.gd" id="1_5qjhm"]
 [ext_resource type="Texture2D" uid="uid://cy0civb02g1it" path="res://icon.svg" id="2_kf0j1"]
 [ext_resource type="PackedScene" uid="uid://c26tjy751s1fy" path="res://scenes/player.tscn" id="3_kf0j1"]
 [ext_resource type="Script" uid="uid://cxlvnh750o034" path="res://scripts/museum/playerMuseum.gd" id="4_4kxtc"]
