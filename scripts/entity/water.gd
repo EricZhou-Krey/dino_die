@@ -39,6 +39,12 @@ func set_state(new_state: Dictionary):
 		sprite_2d.frame = 0
 	#revert appearance here
 
+
+func isTransparent(entity: GridLiver):
+	if full or entity is Rock:
+		return true
+	return false
+
 func set_contains(obj : GridLiver):
 	contains = obj
 	full = true

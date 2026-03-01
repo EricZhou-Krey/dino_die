@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b30qd50q2sbod"]
+[gd_scene format=3 uid="uid://b30qd50q2sbod"]
 
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Script" uid="uid://bwdt88ystkecx" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=228010420]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
 
-[node name="Start" type="Button" parent="."]
+[node name="Start" type="Button" parent="." unique_id=616104210]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -27,7 +27,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 text = "Start Gane"
 
-[node name="Options" type="Button" parent="."]
+[node name="Options" type="Button" parent="." unique_id=2124310560]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -42,7 +42,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Options"
 
-[node name="Quit" type="Button" parent="."]
+[node name="Quit" type="Button" parent="." unique_id=1911426428]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
