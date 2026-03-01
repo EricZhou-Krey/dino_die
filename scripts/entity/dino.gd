@@ -42,26 +42,32 @@ func _update():
 func eat_entities():
 	var current_tile = levelgrid.local_to_map(global_position)
 	for direction in eat_directions:
+		var target_tile = current_tile + direction
+		if target_tile.x >= levelgrid.grid_size.x or target_tile.y >= levelgrid.grid_size.y or \
+			target_tile.x < 0 or target_tile.y < 0:
+				continue
 		var entities = levelgrid.get_entities_at_tile(current_tile + direction)
 		for entity in entities:
 			if levelgrid.unreachable(entity.height, height): continue
 			if entity != null and (entity is Player or entity is Food):
 				print(self, "has eaten", entity)
 				
-func check_sight()-> bool:
+func check_sight():
 	var directions: Array[Vector2i] = [facing_direction]
 	var leftDir : Vector2i = Vector2i(facing_direction.y, facing_direction.x)
 	var rightDir: Vector2i = Vector2i(-facing_direction.y, -facing_direction.x)
 	directions.append(leftDir)
 	directions.append(rightDir)
 	for direction in directions:
-		if check_sight_direction(direction):
+		var seen_entity = check_sight_direction(direction)
+		if seen_entity is Player:
 			print("player spotted by dino")
-			return true
-	return false
+			return
+		if seen_entity is Bush and seen_entity.bush_state == seen_entity.State.BURNING:
+			_set_facing_direction(-direction)
 	
 	
-func check_sight_direction(direction: Vector2i)-> bool:
+func check_sight_direction(direction: Vector2i)-> GridLiver:
 	var start_tile: Vector2i = levelgrid.local_to_map(global_position)
 	var current_tile: Vector2i = start_tile
 	var blocked: bool = false
@@ -70,13 +76,11 @@ func check_sight_direction(direction: Vector2i)-> bool:
 		current_tile = target_tile
 		var tile_data: TileData = levelgrid.get_cell_tile_data(0, target_tile)
 		if tile_data == null:
-			return false
+			return null
 		else:
 			var entities_at_target = levelgrid.get_entities_at_tile(target_tile)
 			for entity in entities_at_target:
 				if entity !=null:
 					if entity.height > height-2 and entity.height<= height:
-						if entity is Player:
-							return true
-						return false
-	return false
+						return entity
+	return null
