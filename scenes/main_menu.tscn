@@ -25,7 +25,7 @@ offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 20
-text = "Start Gane"
+text = "Start Game"
 
 [node name="Options" type="Button" parent="." unique_id=2124310560]
 layout_mode = 1
