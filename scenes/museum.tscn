@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://b8sab8cspmd37"]
+[gd_scene load_steps=9 format=3 uid="uid://b8sab8cspmd37"]
 
-[ext_resource type="Script" uid="uid://bjfdckwepg6uu" path="res://scripts/museum/museumScroll.gd" id="1_5qjhm"]
+[ext_resource type="Script" path="res://scripts/museum/museumScroll.gd" id="1_5qjhm"]
 [ext_resource type="Texture2D" uid="uid://cy0civb02g1it" path="res://icon.svg" id="2_kf0j1"]
 [ext_resource type="PackedScene" uid="uid://c26tjy751s1fy" path="res://scenes/player.tscn" id="3_kf0j1"]
-[ext_resource type="Script" uid="uid://cxlvnh750o034" path="res://scripts/museum/playerMuseum.gd" id="4_4kxtc"]
+[ext_resource type="Script" path="res://scripts/museum/playerMuseum.gd" id="4_4kxtc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4kxtc"]
 atlas = ExtResource("2_kf0j1")
@@ -90,20 +90,20 @@ texture = ExtResource("2_kf0j1")
 [sub_resource type="TileSet" id="TileSet_kf0j1"]
 sources/0 = SubResource("TileSetAtlasSource_5qjhm")
 
-[node name="Museum" type="Node2D" unique_id=1267609317]
+[node name="Museum" type="Node2D"]
 
-[node name="MuseumScroll" type="Node2D" parent="." unique_id=200409144]
+[node name="MuseumScroll" type="Node2D" parent="."]
 position = Vector2(0, 64)
 script = ExtResource("1_5qjhm")
 metadata/_custom_type_script = "uid://bjfdckwepg6uu"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MuseumScroll" unique_id=1170232287]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MuseumScroll"]
 sprite_frames = SubResource("SpriteFrames_ni2ep")
 
-[node name="TileMap" type="TileMap" parent="." unique_id=2121417074]
+[node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_kf0j1")
 format = 2
 
-[node name="Player" parent="." unique_id=1095699345 instance=ExtResource("3_kf0j1")]
+[node name="Player" parent="." instance=ExtResource("3_kf0j1")]
 position = Vector2(96, 64)
 script = ExtResource("4_4kxtc")

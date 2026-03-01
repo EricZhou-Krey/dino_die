@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://c26tjy751s1fy"]
+[gd_scene load_steps=52 format=3 uid="uid://c26tjy751s1fy"]
 
-[ext_resource type="Script" uid="uid://7tq73ldgy2rd" path="res://scripts/entity/player.gd" id="1_iw3mo"]
+[ext_resource type="Script" path="res://scripts/entity/player.gd" id="1_iw3mo"]
 [ext_resource type="Texture2D" uid="uid://bysqpgahi3mqs" path="res://assets/Characters/JanitorSheet.png" id="2_jk4pq"]
-[ext_resource type="Script" uid="uid://dpbhxaxadqaxo" path="res://scripts/tools/torch.gd" id="3_78i0y"]
-[ext_resource type="Script" uid="uid://08flo430s61f" path="res://scripts/tools/hand.gd" id="3_i5ptl"]
-[ext_resource type="Script" uid="uid://bctwg8a0r8wat" path="res://scripts/tools/bucket.gd" id="5_qlg0r"]
+[ext_resource type="Script" path="res://scripts/tools/torch.gd" id="3_78i0y"]
+[ext_resource type="Script" path="res://scripts/tools/hand.gd" id="3_i5ptl"]
+[ext_resource type="Script" path="res://scripts/tools/bucket.gd" id="5_qlg0r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0txee"]
 atlas = ExtResource("2_jk4pq")
@@ -419,20 +419,20 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="Node2D" unique_id=1095699345]
+[node name="Player" type="Node2D"]
 script = ExtResource("1_iw3mo")
 starting_tools = Array[String](["Hand", "Torch", "Bucket"])
 sprite_sheet_offsets = Array[int]([0, 6, 12])
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1648616937]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3aw3n")
 
-[node name="Hand" type="Node2D" parent="." unique_id=1626373812]
+[node name="Hand" type="Node2D" parent="."]
 script = ExtResource("3_i5ptl")
 
-[node name="Torch" type="Node2D" parent="." unique_id=586759089]
+[node name="Torch" type="Node2D" parent="."]
 script = ExtResource("3_78i0y")
 
-[node name="Bucket" type="Node2D" parent="." unique_id=333156895]
+[node name="Bucket" type="Node2D" parent="."]
 script = ExtResource("5_qlg0r")
 metadata/_custom_type_script = "uid://bctwg8a0r8wat"
