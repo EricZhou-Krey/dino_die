@@ -44,19 +44,32 @@ func set_state(new_state: Dictionary):
 
 func _physics_process(delta):
 	sprite_2d.global_position = sprite_2d.global_position.move_toward(global_position, 2)
-	
+
+func isTransparent(entity: GridLiver):
+	return transparent
+
 func move(direction: Vector2i) -> bool:
 	var current_tile: Vector2i = levelgrid.local_to_map(global_position)
 	var target_tile: Vector2i = current_tile + direction
-	print(levelgrid)
 	
 	var tile_data: TileData = levelgrid.get_cell_tile_data(0, target_tile)
 	
 	if tile_data == null or tile_data.get_custom_data("walkable") == false:
 		return false
+
+	var entities_at_target = levelgrid.get_entities_at_tile(target_tile)
 	
 	var new_height = height
 	var tile_height = tile_data.get_custom_data("height")
+	
+	for entity in entities_at_target:
+		if tile_height == height:
+			break
+		if entity is Rock:
+			tile_height += 2
+			if tile_height == height:
+				break
+				
 	if tile_height != height:
 		if pushable_uphill:
 			var from_tile = levelgrid.get_cell_tile_data(0, current_tile)
@@ -73,21 +86,22 @@ func move(direction: Vector2i) -> bool:
 			new_height = tile_height
 		else:
 			return false
-	
-	var entities_at_target = levelgrid.get_entities_at_tile(target_tile)
+			
 	for entity_at_target in entities_at_target:
 		var tile_behind_target = target_tile + direction
 		var entities_behind_target = levelgrid.get_entities_at_tile(tile_behind_target)
 
 		for entity_behind_target in entities_behind_target:
 			if levelgrid.unreachable(entity_behind_target.height, entity_at_target.height): continue
-			if entity_behind_target != null and not entity_behind_target.transparent and not entity_at_target.transparent:
+			if entity_behind_target != null and not entity_behind_target.transparent and not entity_at_target.transparent and \
+				not(entity_behind_target is Dino and entity_behind_target.dino_size == entity_behind_target.Size.MID) and \
+				not(levelgrid.unreachable(entity_behind_target.height, height)):
 				return false
 		
-		if not(entity_at_target.transparent):
+		if not(entity_at_target.isTransparent(self)):
 			if not(can_push) or not(entity_at_target.move(direction)):
 				return false
-	
+				
 	height = new_height
 	levelgrid.remove_entity_at_tile(current_tile, self)
 	levelgrid.add_entity_at_tile(target_tile, self)

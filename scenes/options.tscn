@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://cgfxf5nccojfh"]
+[gd_scene load_steps=2 format=3 uid="uid://cgfxf5nccojfh"]
 
-[ext_resource type="Script" uid="uid://cb6c5iukjx8la" path="res://scenes/options.gd" id="1_c2u1v"]
+[ext_resource type="Script" path="res://scenes/options.gd" id="1_c2u1v"]
 
-[node name="Options" type="Control" unique_id=2006796741]
+[node name="Options" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_c2u1v")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=316615026]
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 487.0
 offset_top = 263.0
@@ -19,7 +19,7 @@ offset_right = 665.0
 offset_bottom = 324.0
 text = "Options"
 
-[node name="Button" type="Button" parent="." unique_id=1273154999]
+[node name="Button" type="Button" parent="."]
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0

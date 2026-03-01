@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://6crmo5mk05xo"]
+[gd_scene load_steps=4 format=3 uid="uid://6crmo5mk05xo"]
 
 [ext_resource type="Script" path="res://scripts/entity/rock.gd" id="1_kpnja"]
 [ext_resource type="Texture2D" uid="uid://d3xq2hw3dyox1" path="res://assets/Rocks/Rock.png" id="2_royxl"]
