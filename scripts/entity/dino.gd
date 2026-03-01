@@ -55,7 +55,8 @@ func eat_entities():
 		for entity in entities:
 			if levelgrid.unreachable(entity.height, height): continue
 			if entity != null and (entity is Player or entity is Food):
-				print(self, "has eaten", entity)
+				entity.is_dead = true
+				$"../LoseOverlay/AnimationPlayer".play("dino_js")
 				
 func check_sight_player():
 	var directions: Array[Vector2i] = [facing_direction]
@@ -66,8 +67,8 @@ func check_sight_player():
 	for direction in directions:
 		var seen_entity = check_sight_direction(direction)
 		if seen_entity is Player:
-			print("player spotted by dino")
-			return
+			seen_entity.is_dead = true
+			$"../LoseOverlay/AnimationPlayer".play("dino_js")
 			
 func check_sight_entity():
 	var directions: Array[Vector2i] = [facing_direction]

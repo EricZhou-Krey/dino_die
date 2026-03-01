@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://j1r31cjq4isl"]
+[gd_scene load_steps=15 format=3 uid="uid://j1r31cjq4isl"]
 
 [ext_resource type="Texture2D" uid="uid://cfidoaxoxictl" path="res://assets/Grass/GrassBackground.png" id="1_0xorp"]
 [ext_resource type="Texture2D" uid="uid://cy0civb02g1it" path="res://icon.svg" id="2_qeegb"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c26tjy751s1fy" path="res://scenes/player.tscn" id="3_l43yc"]
 [ext_resource type="PackedScene" uid="uid://6crmo5mk05xo" path="res://scenes/rock.tscn" id="4_1j85w"]
 [ext_resource type="PackedScene" uid="uid://c43fg4m4xmkc2" path="res://scenes/bush.tscn" id="7_m75qw"]
+[ext_resource type="PackedScene" uid="uid://b5d0wwp37l3oi" path="res://scenes/lose_overlay.tscn" id="9_i6cj8"]
 [ext_resource type="PackedScene" uid="uid://b6ftjaacs6inm" path="res://scenes/dino.tscn" id="9_upcb7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wlxdp"]
@@ -149,3 +150,7 @@ dino_size = 1
 [node name="Dino3" parent="." instance=ExtResource("9_upcb7")]
 position = Vector2(80, 272)
 dino_size = 2
+
+[node name="LoseOverlay" parent="." instance=ExtResource("9_i6cj8")]
+position = Vector2(688, 128)
+scale = Vector2(16, 16)
