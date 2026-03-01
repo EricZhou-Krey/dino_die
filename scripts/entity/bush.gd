@@ -12,12 +12,23 @@ func _ready():
 	transparent = true
 	state["burn_timer"] = burn_timer
 	state["bush_state"] = bush_state
-	if random_bush: sprite_2d.frame = randi_range(0, 4)
+	if random_bush: var sprite_frame = randi_range(0, 4)
 
 func set_state(new_state: Dictionary):
 	super.set_state(new_state)
 	burn_timer = state["burn_timer"]
 	bush_state = state["bush_state"]
+	match bush_state:
+		State.FRESH:
+			sprite_2d.play("default")
+			sprite_2d.frame = randi_range(0, 4)
+			sprite_2d.stop()
+		State.BURNING:
+			sprite_2d.play("burning")
+		State.BURNT:
+			sprite_2d.play("default")
+			sprite_2d.frame = 5
+			sprite_2d.stop()
 	
 func move(_direction: Vector2i):
 	return true

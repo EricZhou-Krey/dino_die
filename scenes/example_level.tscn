@@ -123,12 +123,24 @@ format = 2
 
 [node name="Bush" parent="." instance=ExtResource("7_m75qw")]
 position = Vector2(48, 48)
+burn_timer = 3
+random_bush = true
+facing_direction = Vector2i(1, 0)
+height = 0
 
 [node name="Bush2" parent="." instance=ExtResource("7_m75qw")]
 position = Vector2(80, 48)
+burn_timer = 3
+random_bush = true
+facing_direction = Vector2i(1, 0)
+height = 0
 
 [node name="Bush3" parent="." instance=ExtResource("7_m75qw")]
 position = Vector2(112, 48)
+burn_timer = 3
+random_bush = true
+facing_direction = Vector2i(1, 0)
+height = 0
 
 [node name="Player" parent="." instance=ExtResource("3_l43yc")]
 position = Vector2(176, 112)

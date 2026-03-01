@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://b30qd50q2sbod"]
+[gd_scene load_steps=5 format=3 uid="uid://b30qd50q2sbod"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+
+[sub_resource type="Animation" id="Animation_evrlg"]
+resource_name = "fade_in"
+
+[sub_resource type="Animation" id="Animation_2hu6h"]
+resource_name = "fade_out"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kptiq"]
+_data = {
+"fade_in": SubResource("Animation_evrlg"),
+"fade_out": SubResource("Animation_2hu6h")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -56,6 +68,24 @@ offset_bottom = 142.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Quit"
+
+[node name="fade_transition" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="fade_transition"]
+libraries = {
+"": SubResource("AnimationLibrary_kptiq")
+}
+
+[node name="fade_in" type="Timer" parent="fade_transition"]
+wait_time = 0.5
+one_shot = true
+
+[node name="fade_out" type="Timer" parent="fade_transition"]
+wait_time = 0.5
+one_shot = true
 
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Options" to="." method="_on_options_pressed"]
